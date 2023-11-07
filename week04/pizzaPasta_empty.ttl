@@ -1,0 +1,209 @@
+@prefix : <http://ise-fizkarlsruhe.github.io/openhpi-kg2023/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://ise-fizkarlsruhe.github.io/openhpi-kg2023/ontology#> .
+
+<http://ise-fizkarlsruhe.github.io/openhpi-kg2023/ontology#> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/ontology#competitor
+:competitor rdf:type owl:ObjectProperty ,
+                     owl:SymmetricProperty ;
+            rdfs:domain :Restaurant ;
+            rdfs:range :Restaurant .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/ontology#ingredient
+:ingredient rdf:type owl:ObjectProperty ;
+            rdfs:domain [ rdf:type owl:Class ;
+                          owl:unionOf ( :Dish
+                                        :Ingredient
+                                      )
+                        ] ;
+            rdfs:range :Ingredient .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/ontology#pizzaBase
+:pizzaBase rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :ingredient ;
+           rdfs:domain :Pizza ;
+           rdfs:range :PizzaBase .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/ontology#Cheese
+:Cheese rdf:type owl:Class ;
+        rdfs:subClassOf :Dairy .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/ontology#Dairy
+:Dairy rdf:type owl:Class ;
+       rdfs:subClassOf :Ingredient .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/ontology#Dish
+:Dish rdf:type owl:Class ;
+      owl:disjointWith :Ingredient .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/ontology#Ingredient
+:Ingredient rdf:type owl:Class .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/ontology#Meat
+:Meat rdf:type owl:Class ;
+      rdfs:subClassOf :Ingredient .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/ontology#PastaDish
+:PastaDish rdf:type owl:Class ;
+           rdfs:subClassOf :Dish .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/ontology#PastaType
+:PastaType rdf:type owl:Class ;
+           rdfs:subClassOf :Ingredient ;
+           rdfs:label "Pasta Type"@en .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/ontology#Pizza
+:Pizza rdf:type owl:Class ;
+       rdfs:subClassOf :Dish .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/ontology#PizzaBase
+:PizzaBase rdf:type owl:Class ;
+           rdfs:subClassOf :Ingredient ;
+           rdfs:label "Pizza Base"@en .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/ontology#Restaurant
+:Restaurant rdf:type owl:Class ;
+            rdfs:subClassOf <http://xmlns.com/foaf/0.1/Organization> .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/ontology#Vegetable
+:Vegetable rdf:type owl:Class ;
+           rdfs:subClassOf :Ingredient .
+
+
+###  http://xmlns.com/foaf/0.1/Organization
+<http://xmlns.com/foaf/0.1/Organization> rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Bolognese
+<http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Bolognese> rdf:type owl:NamedIndividual ,
+                                                                               :PastaDish ;
+                                                                      :ingredient <http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Spaghetti> ,
+                                                                                  <http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Tomato> .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Carbonara
+<http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Carbonara> rdf:type owl:NamedIndividual ,
+                                                                               :PastaDish ;
+                                                                      :ingredient <http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Egg> ,
+                                                                                  <http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Pancetta> ,
+                                                                                  <http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Spaghetti> .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#CasaNostra
+<http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#CasaNostra> rdf:type owl:NamedIndividual ,
+                                                                                :Restaurant ;
+                                                                       :competitor <http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Gustoso> ;
+                                                                       rdfs:label "Casa Nostra"@en .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Egg
+<http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Egg> rdf:type owl:NamedIndividual ,
+                                                                         :Ingredient .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Flatbread
+<http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Flatbread> rdf:type owl:NamedIndividual ,
+                                                                               :PizzaBase .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Flour
+<http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Flour> rdf:type owl:NamedIndividual ,
+                                                                           :Ingredient .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Fusilli
+<http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Fusilli> rdf:type owl:NamedIndividual ,
+                                                                             :PastaType .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Gustoso
+<http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Gustoso> rdf:type owl:NamedIndividual ,
+                                                                             :Restaurant ;
+                                                                    rdfs:label "Gustoso"@en .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Margarita
+<http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Margarita> rdf:type owl:NamedIndividual ,
+                                                                               :Pizza ;
+                                                                      :ingredient <http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Mozzarella> ,
+                                                                                  <http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Tomato> ,
+                                                                                  <http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#YeastedDough> .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Mozzarella
+<http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Mozzarella> rdf:type owl:NamedIndividual ,
+                                                                                :Cheese .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Napoli
+<http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Napoli> rdf:type owl:NamedIndividual ;
+                                                                   :ingredient <http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Mozzarella> ,
+                                                                               <http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Tomato> ;
+                                                                   :pizzaBase <http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#YeastedDough> .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Pancetta
+<http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Pancetta> rdf:type owl:NamedIndividual ,
+                                                                              :Meat .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Spaghetti
+<http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Spaghetti> rdf:type owl:NamedIndividual ,
+                                                                               :PastaType ;
+                                                                      :ingredient <http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Flour> ,
+                                                                                  <http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Water> .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Tomato
+<http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Tomato> rdf:type owl:NamedIndividual ,
+                                                                            :Vegetable .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Water
+<http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Water> rdf:type owl:NamedIndividual ,
+                                                                           :Ingredient .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#YeastedDough
+<http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#YeastedDough> rdf:type owl:NamedIndividual ,
+                                                                                  :PizzaBase .
+
+
+###  http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#4Cheese
+<http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#4Cheese> rdf:type owl:NamedIndividual ,
+                                                                             :Pizza ;
+                                                                    :ingredient <http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#Mozzarella> ;
+                                                                    :pizzaBase <http://ise-fizkarlsruhe.github.io/openhpi-kg2023/resource#YeastedDough> .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi

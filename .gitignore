@@ -2,3 +2,5 @@
 *.zip
 __MACOSX
 **/__MACOSX
+**/*.mp4
+
